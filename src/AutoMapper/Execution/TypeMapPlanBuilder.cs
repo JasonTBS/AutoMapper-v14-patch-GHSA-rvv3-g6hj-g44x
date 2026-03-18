@@ -105,7 +105,16 @@ public ref struct TypeMapPlanBuilder(IGlobalConfiguration configuration, TypeMap
                     }
                     continue;
                 }
+              
                 memberTypeMap.PreserveReferences = true;
+
+                //Begin patch 14.0.1
+                if (memberTypeMap.MaxDepth == 0)
+                {
+                    memberTypeMap.MaxDepth = 64;
+                }
+                //End patch 14.0.1
+                
                 Trace(typeMap, memberTypeMap, memberMap);
                 if (memberMap.Inline)
                 {
